@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { BlogList } from './ui/BlogList';
 import { BlogDetail } from './ui/BlogDetail';
