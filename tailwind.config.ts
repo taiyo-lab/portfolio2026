@@ -1,0 +1,13 @@
+import type { Config } from 'tailwindcss';
+
+export default {
+  content: [
+    './index.html',
+    './App.tsx',
+    './main.tsx',
+    './components/**/*.{ts,tsx}'
+  ],
+  theme: {
+    extend: {}
+  }
+} satisfies Config;
