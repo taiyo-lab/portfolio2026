@@ -99,7 +99,7 @@ export function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      placeholder="山田太郎"
+                      placeholder="小林大洋"
                     />
                   </div>
                   <div>

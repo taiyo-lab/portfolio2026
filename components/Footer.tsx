@@ -21,7 +21,7 @@ export function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="text-xl mb-4">田中太郎</h3>
+            <h3 className="text-xl mb-4">小林大洋</h3>
             <p className="text-muted-foreground mb-4">
               React、TypeScript、Node.jsを専門とするフルスタックエンジニア。
               ユーザー体験を重視したWebアプリケーション開発を行っています。
@@ -104,7 +104,7 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm">
-            © {currentYear} 田中太郎. All rights reserved.
+            © {currentYear} 小林大洋. All rights reserved.
           </p>
           <div className="flex items-center space-x-2 text-muted-foreground text-sm mt-4 md:mt-0">
             <span>Made with</span>

@@ -28,7 +28,7 @@ export function Hero() {
           </div>
 
           <h1 className="text-4xl md:text-6xl mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-            田中 太郎
+            小林 大洋
           </h1>
 
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
