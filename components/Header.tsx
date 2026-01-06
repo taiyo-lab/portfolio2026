@@ -18,12 +18,12 @@ export function Header() {
   }, []);
 
   const navItems = [
-    { label: "ホーム", id: "hero" },
-    { label: "概要", id: "about" },
-    { label: "スキル", id: "skills" },
-    { label: "プロジェクト", id: "projects" },
-    { label: "経歴", id: "experience" },
-    { label: "連絡先", id: "contact" },
+    { label: "Home", id: "hero" },
+    { label: "About", id: "about" },
+    { label: "Skills", id: "skills" },
+    { label: "Projects", id: "projects" },
+    { label: "Experience", id: "experience" },
+    { label: "Contact", id: "contact" },
   ];
 
   return (
@@ -38,7 +38,7 @@ export function Header() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="text-xl font-medium text-primary">
-              Portfolio
+              Masahiro.dev
             </Link>
           </div>
 
@@ -57,7 +57,7 @@ export function Header() {
               href="/blog"
               className="text-muted-foreground hover:text-foreground transition-colors duration-200"
             >
-              ブログ
+              Blog
             </Link>
           </nav>
 
@@ -96,7 +96,7 @@ export function Header() {
                 className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
-                ブログ
+                Blog
               </Link>
             </div>
           </div>

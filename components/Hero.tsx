@@ -1,21 +1,24 @@
 "use client";
 
-import React from 'react';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { Github, Linkedin, Mail, Download } from 'lucide-react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import React from "react";
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
+import { Github, Linkedin, Mail, Download } from "lucide-react";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function Hero() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center pt-16">
+    <section
+      id="hero"
+      className="min-h-screen flex items-center justify-center pt-16"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <div className="mb-8">
@@ -24,19 +27,17 @@ export function Hero() {
               alt="プロフィール写真"
               className="w-32 h-32 rounded-full mx-auto mb-6 object-cover"
             />
-            <Badge variant="secondary" className="mb-4">
-              フルスタックエンジニア
-            </Badge>
           </div>
 
           <h1 className="text-4xl md:text-6xl mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-            小林 大洋
+            Masahiro Kobayashi
           </h1>
 
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            React、Node.js、TypeScriptを専門とするフルスタックエンジニア。
+            Hi! Im Masahiro Kobayashi.
             <br />
-            ユーザー体験を重視したWebアプリケーション開発に情熱を注いでいます。
+            I love web technologies!🚀🚀🚀
+            <br />I want to build valuable products while enjoying the process🧖
           </p>
 
           <div className="flex justify-center space-x-4 mb-8">
@@ -55,7 +56,7 @@ export function Hero() {
           </div>
 
           <div className="flex justify-center space-x-4">
-            <Button onClick={() => scrollToSection('projects')}>
+            <Button onClick={() => scrollToSection("projects")}>
               プロジェクトを見る
             </Button>
             <Button variant="outline">
