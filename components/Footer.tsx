@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { Separator } from './ui/separator';
 import { Github, Linkedin, Twitter, Heart } from 'lucide-react';
 
@@ -10,10 +11,6 @@ export function Footer() {
     { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
     { icon: Twitter, url: 'https://twitter.com', label: 'Twitter' },
   ];
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <footer className="bg-muted/20 border-t border-border">
@@ -47,44 +44,52 @@ export function Footer() {
             <h4 className="mb-4">クイックリンク</h4>
             <ul className="space-y-2 text-muted-foreground">
               <li>
-                <button
-                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                <Link
+                  href="/#about"
                   className="hover:text-foreground transition-colors"
                 >
                   自己紹介
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' })}
+                <Link
+                  href="/#skills"
                   className="hover:text-foreground transition-colors"
                 >
                   スキル
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                <Link
+                  href="/#projects"
                   className="hover:text-foreground transition-colors"
                 >
                   プロジェクト
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
+                <Link
+                  href="/#experience"
                   className="hover:text-foreground transition-colors"
                 >
                   経歴
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                <Link
+                  href="/blog"
+                  className="hover:text-foreground transition-colors"
+                >
+                  ブログ
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/#contact"
                   className="hover:text-foreground transition-colors"
                 >
                   お問い合わせ
-                </button>
+                </Link>
               </li>
             </ul>
           </div>
@@ -114,12 +119,12 @@ export function Footer() {
         </div>
 
         <div className="text-center mt-8">
-          <button
-            onClick={scrollToTop}
+          <Link
+            href="/#hero"
             className="text-muted-foreground hover:text-foreground transition-colors text-sm"
           >
             ↑ トップに戻る
-          </button>
+          </Link>
         </div>
       </div>
     </footer>

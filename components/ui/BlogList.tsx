@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { BlogCard, BlogPost } from './BlogCard';
 import { Input } from './input';
