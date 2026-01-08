@@ -3,7 +3,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { Github, Linkedin, Mail, Download } from "lucide-react";
+import { Github, Mail, Download } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function Hero() {
@@ -23,13 +23,13 @@ export function Hero() {
         <div className="text-center">
           <div className="mb-8">
             <ImageWithFallback
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+              src="/images/my-image.jpeg"
               alt="プロフィール写真"
               className="w-32 h-32 rounded-full mx-auto mb-6 object-cover"
             />
           </div>
 
-          <h1 className="text-4xl md:text-6xl mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+          <h1 className="text-4xl md:text-6xl mb-6 pb-1 leading-[1.2] bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
             Masahiro Kobayashi
           </h1>
 
@@ -41,17 +41,15 @@ export function Hero() {
           </p>
 
           <div className="flex justify-center space-x-4 mb-8">
-            <Button variant="outline" size="sm">
-              <Github className="w-4 h-4 mr-2" />
-              GitHub
-            </Button>
-            <Button variant="outline" size="sm">
-              <Linkedin className="w-4 h-4 mr-2" />
-              LinkedIn
-            </Button>
-            <Button variant="outline" size="sm">
-              <Mail className="w-4 h-4 mr-2" />
-              メール
+            <Button asChild variant="outline" size="sm">
+              <a
+                href="https://github.com/taiyo-lab"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="w-4 h-4 mr-2" />
+                GitHub
+              </a>
             </Button>
           </div>
 
@@ -59,9 +57,14 @@ export function Hero() {
             <Button onClick={() => scrollToSection("projects")}>
               プロジェクトを見る
             </Button>
-            <Button variant="outline">
-              <Download className="w-4 h-4 mr-2" />
-              履歴書をダウンロード
+            <Button asChild variant="outline">
+              <a
+                href="/images/%E5%B1%A5%E6%AD%B4%E6%9B%B8+%20%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8.pdf"
+                download
+              >
+                <Download className="w-4 h-4 mr-2" />
+                履歴書をダウンロード
+              </a>
             </Button>
           </div>
         </div>

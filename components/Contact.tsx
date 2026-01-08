@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, Phone, Github } from 'lucide-react';
 import { toast } from 'sonner';
 
 export function Contact() {
@@ -26,30 +26,26 @@ export function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // ここでフォームデータを処理（実際の送信ロジック）
-    console.log('Form submitted:', formData);
-    toast.success('メッセージを送信しました！近日中にご返信いたします。');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    const subject = encodeURIComponent(formData.subject || 'お問い合わせ');
+    const body = encodeURIComponent(
+      `お名前: ${formData.name}\nメール: ${formData.email}\n\n${formData.message}`,
+    );
+    window.location.href = `mailto:koba.syyukied@gmail.com?subject=${subject}&body=${body}`;
+    toast.success('メールアプリを開きました。内容をご確認ください。');
   };
 
   const contactInfo = [
     {
       icon: Mail,
       label: 'メール',
-      value: 'tanaka@example.com',
-      link: 'mailto:tanaka@example.com',
+      value: 'koba.syyukied@gmail.com',
+      link: 'mailto:koba.syyukied@gmail.com',
     },
     {
       icon: Phone,
       label: '電話',
-      value: '+81 90-1234-5678',
-      link: 'tel:+819012345678',
-    },
-    {
-      icon: MapPin,
-      label: '所在地',
-      value: '東京都渋谷区',
-      link: null,
+      value: '080-6949-1169',
+      link: 'tel:08069491169',
     },
   ];
 
@@ -57,20 +53,8 @@ export function Contact() {
     {
       icon: Github,
       label: 'GitHub',
-      url: 'https://github.com',
+      url: 'https://github.com/taiyo-lab',
       color: 'hover:text-gray-900',
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      url: 'https://linkedin.com',
-      color: 'hover:text-blue-600',
-    },
-    {
-      icon: Twitter,
-      label: 'Twitter',
-      url: 'https://twitter.com',
-      color: 'hover:text-blue-400',
     },
   ];
 

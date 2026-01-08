@@ -1,14 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { Separator } from './ui/separator';
-import { Github, Linkedin, Twitter, Heart } from 'lucide-react';
+import { Github, Twitter, Heart } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Github, url: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, url: 'https://linkedin.com', label: 'LinkedIn' },
+    { icon: Github, url: 'https://github.com/taiyo-lab', label: 'GitHub' },
     { icon: Twitter, url: 'https://twitter.com', label: 'Twitter' },
   ];
 
@@ -98,7 +97,7 @@ export function Footer() {
           <div>
             <h4 className="mb-4">連絡先</h4>
             <div className="space-y-2 text-muted-foreground">
-              <p>tanaka@example.com</p>
+              <p>koba.syyukied@gmail.com</p>
               <p>+81 90-1234-5678</p>
               <p>東京都渋谷区</p>
             </div>

@@ -21,26 +21,22 @@ export function About() {
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="text-lg mb-6 leading-relaxed">
-              Web技術が好きなエンジニアです。
-              <br />
-              新卒で建築会社に入社し施工管理を経験した後、2021年よりエンジニアとしてキャリアをスタート。
-              <br />
-              フロントエンドを主軸に、React / Next.js / TypeScript を用いた
-              Webアプリケーション開発に4年間携わってきました。
-              <br />
-              直近ではバックエンドAPIの改修やAWS環境の運用・改善にも関わり、
-              プロダクト全体を意識した開発を心がけています。
-              <br />
-              「なぜこの仕様なのか」「もっと良くできないか」を考えながら、
-              能動的に改善に取り組むスタンスを大切にしています。
-            </p>
-            <p className="text-lg mb-6 leading-relaxed">
-              ユーザー体験を第一に考え、パフォーマンスとアクセシビリティを重視した
-              開発を心がけています。
-              <br />
-              チーム開発では積極的にコミュニケーションを取り、
-              知識の共有とコードレビューを通じてチーム全体のスキル向上に貢献しています。
+            <p className="text-lg mb-6 leading-relaxed space-y-3">
+              <span className="block">Web技術が好きです。</span>
+              <span className="block">
+                新卒で建築会社に入社し施工管理を経験した後、2021年よりエンジニアとしてキャリアをスタート。
+              </span>
+              <span className="block">
+                フロントエンドを主軸に、React / Next.js / TypeScript を用いた
+                Webアプリケーション開発に4年間携わってきました。
+              </span>
+              <span className="block">
+                直近ではバックエンドやAWS環境の運用・改善にも関わっています。
+              </span>
+              <span className="block">
+                「なぜこの仕様なのか」「もっと良くできないか」を考えながら、
+                能動的に取り組むスタンスを大切にしています。
+              </span>
             </p>
             <div className="flex flex-wrap gap-2">
               {highlights.map((highlight, index) => (
@@ -61,7 +57,9 @@ export function About() {
                     株式会社ぐるなび（2024年〜現在）
                   </p>
                   <p className="text-sm mt-2">
-                    検索機能開発。フロントエンドを主軸に、
+                    検索機能開発。
+                    <br />
+                    フロントエンドを主軸に、
                     バックエンド・AWSまで担当領域を拡張。
                   </p>
                 </div>
@@ -72,6 +70,7 @@ export function About() {
                   </p>
                   <p className="text-sm mt-2">
                     大規模チームでの基幹システム開発に参画。
+                    <br />
                     共通コンポーネント開発・不具合修正を担当。
                   </p>
                 </div>
@@ -86,9 +85,10 @@ export function About() {
                   </p>
                 </div>
                 <div className="border-l-2 border-primary pl-4">
-                  <h4 className="text-lg">
-                    フリーランスエンジニア（2021年〜2022年）
-                  </h4>
+                  <h4 className="text-lg">フリーランスエンジニア</h4>
+                  <p className="text-muted-foreground">
+                    Webサイトコーダー（2021年〜2022年）
+                  </p>
                   <p className="text-sm mt-2">
                     WordPressを用いたWebサイトの新規構築・改修・保守を担当。
                   </p>
