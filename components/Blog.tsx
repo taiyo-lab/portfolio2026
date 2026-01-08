@@ -133,7 +133,7 @@ export function Blog() {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
   return (
-    <section id="blog" className="py-20">
+    <section id="blog" className="py-10 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {!selectedPost ? (
           <>

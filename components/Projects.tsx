@@ -97,7 +97,7 @@ export function Projects() {
   const otherProjects = projects.filter((project) => !project.featured);
 
   return (
-    <section id="projects" className="py-20 bg-muted/20">
+    <section id="projects" className="py-10 md:py-16 bg-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl mb-4">趣味で作成したアプリ</h2>
@@ -107,7 +107,7 @@ export function Projects() {
         </div>
 
         {/* Featured Projects */}
-        <div className="mb-16">
+        <div className="mb-8">
           <h3 className="text-2xl mb-8">注目プロジェクト</h3>
           <div className="grid md:grid-cols-2 gap-8">
             {featuredProjects.map((project, index) => (
