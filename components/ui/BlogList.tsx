@@ -5,6 +5,13 @@ import { BlogCard, BlogPost } from './BlogCard';
 import { Input } from './input';
 import { Badge } from './badge';
 import { Tabs, TabsList, TabsTrigger } from './tabs';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from './select';
 import { Search } from 'lucide-react';
 
 interface BlogListProps {
@@ -24,6 +31,7 @@ export function BlogList({ posts, onPostClick }: BlogListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
 
   // カテゴリーでフィルタリングされた記事
   const categoryFilteredPosts = selectedCategory === 'all'
@@ -42,6 +50,12 @@ export function BlogList({ posts, onPostClick }: BlogListProps) {
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTag = !selectedTag || post.tags.includes(selectedTag);
     return matchesSearch && matchesTag;
+  });
+
+  const sortedPosts = [...filteredPosts].sort((a, b) => {
+    const timeA = new Date(a.date).getTime();
+    const timeB = new Date(b.date).getTime();
+    return sortOrder === 'newest' ? timeB - timeA : timeA - timeB;
   });
 
   // カテゴリー変更時にタグをリセット
@@ -65,15 +79,33 @@ export function BlogList({ posts, onPostClick }: BlogListProps) {
 
       {/* 検索とタグフィルター */}
       <div className="space-y-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-          <Input
-            type="text"
-            placeholder="記事を検索..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
-          />
+        <div className="flex flex-col gap-4 md:flex-row md:items-center">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="記事を検索..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+          <div className="w-full md:w-48">
+            <Select
+              value={sortOrder}
+              onValueChange={(value) =>
+                setSortOrder(value as 'newest' | 'oldest')
+              }
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="並び替え" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="newest">新しい順</SelectItem>
+                <SelectItem value="oldest">古い順</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {allTags.length > 0 && (
@@ -100,9 +132,9 @@ export function BlogList({ posts, onPostClick }: BlogListProps) {
       </div>
 
       {/* 記事一覧 */}
-      {filteredPosts.length > 0 ? (
+      {sortedPosts.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredPosts.map((post) => (
+          {sortedPosts.map((post) => (
             <BlogCard key={post.id} post={post} onClick={() => onPostClick(post)} />
           ))}
         </div>
