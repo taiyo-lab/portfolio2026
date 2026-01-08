@@ -30,12 +30,10 @@ export function Hero() {
           </div>
 
           <h1 className="text-4xl md:text-6xl mb-6 pb-1 leading-[1.2] bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
-            Masahiro Kobayashi
+            Hi! Im Masahiro!
           </h1>
 
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Hi! Im Masahiro Kobayashi.
-            <br />
             I love web technologies!🚀🚀🚀
             <br />I want to build valuable products while enjoying the process🧖
           </p>
