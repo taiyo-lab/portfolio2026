@@ -16,6 +16,7 @@ export function Contact() {
     subject: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -24,14 +25,25 @@ export function Contact() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(formData.subject || 'お問い合わせ');
-    const body = encodeURIComponent(
-      `お名前: ${formData.name}\nメール: ${formData.email}\n\n${formData.message}`,
-    );
-    window.location.href = `mailto:koba.syyukied@gmail.com?subject=${subject}&body=${body}`;
-    toast.success('メールアプリを開きました。内容をご確認ください。');
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) {
+        throw new Error('Failed to send');
+      }
+      toast.success('メッセージを送信しました！近日中にご返信いたします。');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      toast.error('送信に失敗しました。時間をおいて再度お試しください。');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -64,7 +76,9 @@ export function Contact() {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl mb-4">お問い合わせ</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            プロジェクトのご相談やお仕事のご依頼など、お気軽にご連絡ください
+            プロジェクトのご相談やお仕事のご依頼など、
+            <br className="sm:hidden" />
+            お気軽にご連絡ください
           </p>
         </div>
 
@@ -124,8 +138,8 @@ export function Contact() {
                     placeholder="プロジェクトの詳細やご相談内容をお聞かせください..."
                   />
                 </div>
-                <Button type="submit" className="w-full">
-                  メッセージを送信
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? '送信中...' : 'メッセージを送信'}
                 </Button>
               </form>
             </CardContent>
@@ -187,7 +201,7 @@ export function Contact() {
               <CardContent>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full status-pulse"></div>
                     <span>新しいプロジェクトを受付中</span>
                   </div>
                   <p className="text-muted-foreground text-sm">

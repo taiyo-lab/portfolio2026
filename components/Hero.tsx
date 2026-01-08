@@ -3,7 +3,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { Github, Mail, Download } from "lucide-react";
+import { Github, BookOpen, Download } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 export function Hero() {
@@ -49,6 +49,12 @@ export function Hero() {
               >
                 <Github className="w-4 h-4 mr-2" />
                 GitHub
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <a href="/blog">
+                <BookOpen className="w-4 h-4 mr-2" />
+                Blog
               </a>
             </Button>
           </div>
