@@ -94,14 +94,14 @@ export function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="name">山田太郎 *</Label>
+                    <Label htmlFor="name">お名前 *</Label>
                     <Input
                       id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      placeholder="小林大洋"
+                      placeholder="山田太郎"
                     />
                   </div>
                   <div>
