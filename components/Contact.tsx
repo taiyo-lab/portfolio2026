@@ -1,24 +1,26 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
-import { Label } from './ui/label';
-import { Mail, Phone, Github } from 'lucide-react';
-import { toast } from 'sonner';
+import React, { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { Label } from "./ui/label";
+import { Mail, Phone, Github } from "lucide-react";
+import { toast } from "sonner";
 
 export function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -29,18 +31,18 @@ export function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       if (!res.ok) {
-        throw new Error('Failed to send');
+        throw new Error("Failed to send");
       }
-      toast.success('メッセージを送信しました！近日中にご返信いたします。');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      toast.success("メッセージを送信しました！近日中にご返信いたします。");
+      setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
-      toast.error('送信に失敗しました。時間をおいて再度お試しください。');
+      toast.error("送信に失敗しました。時間をおいて再度お試しください。");
     } finally {
       setIsSubmitting(false);
     }
@@ -49,24 +51,24 @@ export function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      label: 'メール',
-      value: 'koba.syyukied@gmail.com',
-      link: 'mailto:koba.syyukied@gmail.com',
+      label: "メール",
+      value: "koba.syyukied@gmail.com",
+      link: "mailto:koba.syyukied@gmail.com",
     },
     {
       icon: Phone,
-      label: '電話',
-      value: '080-6949-1169',
-      link: 'tel:08069491169',
+      label: "電話",
+      value: "080-6949-1169",
+      link: "tel:08069491169",
     },
   ];
 
   const socialLinks = [
     {
       icon: Github,
-      label: 'GitHub',
-      url: 'https://github.com/taiyo-lab',
-      color: 'hover:text-gray-900',
+      label: "GitHub",
+      url: "https://github.com/taiyo-lab",
+      color: "hover:text-gray-900",
     },
   ];
 
@@ -92,7 +94,7 @@ export function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="name">お名前 *</Label>
+                    <Label htmlFor="name">山田太郎 *</Label>
                     <Input
                       id="name"
                       name="name"
@@ -138,8 +140,12 @@ export function Contact() {
                     placeholder="プロジェクトの詳細やご相談内容をお聞かせください..."
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? '送信中...' : 'メッセージを送信'}
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "送信中..." : "メッセージを送信"}
                 </Button>
               </form>
             </CardContent>
@@ -156,7 +162,9 @@ export function Contact() {
                   <div key={index} className="flex items-center space-x-3">
                     <contact.icon className="w-5 h-5 text-primary" />
                     <div>
-                      <p className="text-sm text-muted-foreground">{contact.label}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {contact.label}
+                      </p>
                       {contact.link ? (
                         <a
                           href={contact.link}
