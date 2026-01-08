@@ -8,20 +8,13 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 export function Projects() {
   const projects = [
     {
-      title: "Eコマースプラットフォーム",
+      title: "ポートフォリオサイト",
       description:
-        "Next.js、Stripe、Supabaseを使用したフルスタックEコマースアプリケーション。商品管理、決済処理、在庫管理機能を実装。",
-      image:
-        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
-      technologies: [
-        "Next.js",
-        "TypeScript",
-        "Stripe",
-        "Supabase",
-        "Tailwind CSS",
-      ],
-      liveUrl: "#",
-      githubUrl: "#",
+        "私のポートフォリオサイト。経歴や制作物、連絡先をまとめたシンプルなWebサイト。Blog機能も搭載。",
+      image: "/images/portfolio.png",
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+      liveUrl: "https://portfolio2026-sooty.vercel.app",
+      githubUrl: "https://github.com/taiyo-lab/portfolio2026",
       featured: true,
     },
     {
@@ -123,8 +116,15 @@ export function Projects() {
                   <CardTitle className="flex items-center justify-between">
                     {project.title}
                     <div className="flex space-x-2">
-                      <Button variant="outline" size="sm">
-                        <ExternalLink className="w-4 h-4" />
+                      <Button asChild variant="outline" size="sm">
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} デモ`}
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
                       </Button>
                       <Button asChild variant="outline" size="sm">
                         <a
