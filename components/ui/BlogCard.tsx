@@ -14,6 +14,7 @@ export interface BlogPost {
   category: 'tech' | 'personal' | 'lifestyle' | 'hobby';
   tags: string[];
   imageUrl?: string;
+  links?: { label: string; url: string }[];
 }
 
 interface BlogCardProps {

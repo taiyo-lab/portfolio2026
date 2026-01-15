@@ -2,7 +2,7 @@ import React from 'react';
 import { BlogPost } from './BlogCard';
 import { Button } from './button';
 import { Badge } from './badge';
-import { Calendar, Clock, User, ArrowLeft, FolderOpen } from 'lucide-react';
+import { Calendar, Clock, User, ArrowLeft, FolderOpen, Link } from 'lucide-react';
 
 // カテゴリー表示用のラベル
 const categoryLabels = {
@@ -82,6 +82,29 @@ export function BlogDetail({ post, onBack }: BlogDetailProps) {
             </p>
           ))}
         </div>
+
+        {post.links && post.links.length > 0 && (
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Link className="h-4 w-4" />
+              <span>参考リンク</span>
+            </div>
+            <ul className="space-y-2">
+              {post.links.map((link, index) => (
+                <li key={`${link.url}-${index}`}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-primary hover:underline"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </article>
     </div>
   );

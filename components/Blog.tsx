@@ -21,6 +21,10 @@ const samplePosts: BlogPost[] = [
     tags: ["React", "JavaScript", "フロントエンド"],
     imageUrl:
       "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=450&fit=crop",
+    links: [
+      { label: "React 19公式ブログ", url: "https://react.dev/blog" },
+      { label: "React Docs", url: "https://react.dev" },
+    ],
   },
   {
     id: "2",
