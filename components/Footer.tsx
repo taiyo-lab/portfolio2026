@@ -1,15 +1,32 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Separator } from './ui/separator';
 import { Github, Twitter, Heart } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const [isHeartPressed, setIsHeartPressed] = useState(false);
+  const [isHeartBursting, setIsHeartBursting] = useState(false);
+  const heartBurstTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const socialLinks = [
     { icon: Github, url: 'https://github.com/taiyo-lab', label: 'GitHub' },
     { icon: Twitter, url: 'https://twitter.com', label: 'Twitter' },
   ];
+
+  useEffect(() => {
+    if (!isHeartBursting) return;
+    if (heartBurstTimerRef.current) clearTimeout(heartBurstTimerRef.current);
+    heartBurstTimerRef.current = setTimeout(() => {
+      setIsHeartBursting(false);
+    }, 520);
+    return () => {
+      if (heartBurstTimerRef.current) clearTimeout(heartBurstTimerRef.current);
+    };
+  }, [isHeartBursting]);
+
 
   return (
     <footer className="bg-muted/20 border-t border-border">
@@ -112,7 +129,24 @@ export function Footer() {
           </p>
           <div className="flex items-center space-x-2 text-muted-foreground text-sm mt-4 md:mt-0">
             <span>Made with</span>
-            <Heart className="w-4 h-4 text-red-500" />
+            <button
+              type="button"
+              aria-label="Send some love"
+              onClick={() => {
+                setIsHeartPressed((prev) => !prev);
+                setIsHeartBursting(true);
+              }}
+              className="relative inline-flex h-7 w-7 items-center justify-center rounded-full transition-transform duration-200 hover:scale-105 active:scale-95"
+            >
+              {isHeartBursting && (
+                <span className="absolute inline-flex h-full w-full rounded-full bg-red-400/30 animate-ping" />
+              )}
+              <Heart
+                className={`relative w-4 h-4 text-red-500 transition-transform duration-300 ${
+                  isHeartPressed ? 'scale-125 fill-red-500' : 'scale-100 fill-transparent'
+                }`}
+              />
+            </button>
             <span>using React & Tailwind CSS</span>
           </div>
         </div>
