@@ -158,6 +158,18 @@ const samplePosts: BlogPost[] = [
     tags: ["音楽"],
     imageUrl: "/images/premium_photo-1673169751233-66b659026185.avif",
   },
+  {
+    id: "12",
+    title: "働くということ",
+    excerpt: "気づき",
+    content: "私が働く理由は、社会に貢献をし幸せを実感するためです。",
+    author: "小林大洋",
+    date: "2026-01-20",
+    readTime: "1分",
+    category: "lifestyle",
+    tags: ["音楽"],
+    imageUrl: "/images/photo-1534361960057-19889db9621e.avif",
+  },
 ];
 
 export function Blog() {
