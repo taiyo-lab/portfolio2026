@@ -63,11 +63,11 @@ export function Hero() {
             </Button>
             <Button asChild variant="outline">
               <a
-                href="/images/%E5%B1%A5%E6%AD%B4%E6%9B%B8+%20%E8%81%B7%E5%8B%99%E7%B5%8C%E6%AD%B4%E6%9B%B8.pdf"
+                href="/images/resume.pdf"
                 download
               >
                 <Download className="w-4 h-4 mr-2" />
-                履歴書をダウンロード
+                職務経歴書をダウンロード
               </a>
             </Button>
           </div>
