@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
-import { Separator } from './ui/separator';
-import { Github, Twitter, Heart } from 'lucide-react';
+import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { Separator } from "./ui/separator";
+import { Github, Twitter, Heart } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,8 +12,8 @@ export function Footer() {
   const heartBurstTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const socialLinks = [
-    { icon: Github, url: 'https://github.com/taiyo-lab', label: 'GitHub' },
-    { icon: Twitter, url: 'https://twitter.com', label: 'Twitter' },
+    { icon: Github, url: "https://github.com/taiyo-lab", label: "GitHub" },
+    { icon: Twitter, url: "https://twitter.com", label: "Twitter" },
   ];
 
   useEffect(() => {
@@ -26,7 +26,6 @@ export function Footer() {
       if (heartBurstTimerRef.current) clearTimeout(heartBurstTimerRef.current);
     };
   }, [isHeartBursting]);
-
 
   return (
     <footer className="bg-muted/20 border-t border-border">
@@ -115,8 +114,8 @@ export function Footer() {
             <h4 className="mb-4">連絡先</h4>
             <div className="space-y-2 text-muted-foreground">
               <p>koba.syyukied@gmail.com</p>
-              <p>+81 90-1234-5678</p>
-              <p>東京都渋谷区</p>
+              <p>080-6949-1169</p>
+              <p>神奈川県茅ヶ崎市</p>
             </div>
           </div>
         </div>
@@ -143,7 +142,9 @@ export function Footer() {
               )}
               <Heart
                 className={`relative w-4 h-4 text-red-500 transition-transform duration-300 ${
-                  isHeartPressed ? 'scale-125 fill-red-500' : 'scale-100 fill-transparent'
+                  isHeartPressed
+                    ? "scale-125 fill-red-500"
+                    : "scale-100 fill-transparent"
                 }`}
               />
             </button>
