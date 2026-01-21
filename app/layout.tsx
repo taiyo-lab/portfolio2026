@@ -12,7 +12,7 @@ const zenKakuGothic = Zen_Kaku_Gothic_New({
 });
 
 export const metadata: Metadata = {
-  title: "エンジニア向けポートフォリオ",
+  title: "Masahiro.dev",
   description: "小林大洋のポートフォリオサイト",
 };
 
