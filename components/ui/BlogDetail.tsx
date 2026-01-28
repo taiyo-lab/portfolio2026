@@ -76,11 +76,19 @@ export function BlogDetail({ post, onBack }: BlogDetailProps) {
 
         {/* 記事本文 */}
         <div className="prose prose-lg max-w-none">
-          {post.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="text-foreground mb-4">
-              {paragraph}
-            </p>
-          ))}
+          {post.content.split('\n\n').map((paragraph, index) => {
+            const lines = paragraph.split('\n');
+            return (
+              <p key={index} className="text-foreground mb-4">
+                {lines.map((line, lineIndex) => (
+                  <React.Fragment key={lineIndex}>
+                    {line}
+                    {lineIndex < lines.length - 1 && <br />}
+                  </React.Fragment>
+                ))}
+              </p>
+            );
+          })}
         </div>
 
         {post.links && post.links.length > 0 && (
