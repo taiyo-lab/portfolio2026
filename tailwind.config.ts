@@ -1,11 +1,9 @@
-import type { Config } from 'tailwindcss';
+import type { Config } from "tailwindcss";
 
 export default {
-  content: [
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}'
-  ],
+  darkMode: "class",
+  content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
   theme: {
-    extend: {}
-  }
+    extend: {},
+  },
 } satisfies Config;

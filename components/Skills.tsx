@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Card,
@@ -6,6 +8,7 @@ import {
   CardTitle,
   CardDescription,
 } from "./ui/card";
+import { motion } from "framer-motion";
 
 interface Skill {
   name: string;
@@ -115,49 +118,80 @@ export function SkillsPattern1() {
     },
   ];
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
+
   return (
-    <section id="skills" className="py-10 md:py-16 bg-muted/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4">スキル・技術スタック</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+    <section id="skills" className="py-20 md:py-24 bg-muted/30 relative">
+      <div className="absolute inset-0 bg-grid-slate-900/[0.04] bg-[bottom_1px_center] dark:bg-grid-slate-400/[0.05] [mask-image:linear-gradient(0deg,transparent,black)] pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.5 }}
+           className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">スキル・技術スタック</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             実務経験に基づく技術スキルと専門領域
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-2 gap-8"
+        >
           {skillCategories.map((category, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle>{category.title}</CardTitle>
-                <CardDescription>{category.description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-2">
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="font-medium">{skill.name}</span>
-                            {skill.years && (
-                              <span className="text-xs text-muted-foreground">
-                                ({skill.years})
-                              </span>
-                            )}
+            <motion.div key={index} variants={item}>
+              <Card className="h-full bg-background/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-colors duration-300 shadow-sm hover:shadow-md">
+                <CardHeader>
+                  <CardTitle className="text-xl font-bold text-primary">{category.title}</CardTitle>
+                  <CardDescription className="text-base">{category.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    {category.skills.map((skill, skillIndex) => (
+                      <div key={skillIndex} className="space-y-2 group">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="font-semibold text-foreground group-hover:text-primary transition-colors">{skill.name}</span>
+                              {skill.years && (
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-secondary text-secondary-foreground font-medium">
+                                  {skill.years}
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
+                        <p className="text-sm text-muted-foreground leading-relaxed pl-1 border-l-2 border-border group-hover:border-primary/50 transition-colors duration-300">
+                          {skill.experience}
+                        </p>
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {skill.experience}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
