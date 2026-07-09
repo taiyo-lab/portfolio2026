@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './card';
 import { Badge } from './badge';
-import { Calendar, Clock, User } from 'lucide-react';
+import { BlogMeta } from './BlogMeta';
 
 export interface BlogPost {
   id: string;
@@ -46,20 +46,7 @@ export function BlogCard({ post, onClick }: BlogCardProps) {
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground line-clamp-3 mb-4">{post.excerpt}</p>
-        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-1">
-            <User className="w-4 h-4" />
-            <span>{post.author}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Calendar className="w-4 h-4" />
-            <span>{post.date}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
-            <span>{post.readTime}</span>
-          </div>
-        </div>
+        <BlogMeta post={post} className="text-sm" />
       </CardContent>
     </Card>
   );

@@ -21,12 +21,13 @@ export function Header() {
   }, []);
 
   const navItems = [
-    { label: "Home", id: "hero" },
-    { label: "About", id: "about" },
-    { label: "Skills", id: "skills" },
-    { label: "Projects", id: "projects" },
-    { label: "Experience", id: "experience" },
-    { label: "Contact", id: "contact" },
+    { label: "Home", href: "/#hero" },
+    { label: "About", href: "/#about" },
+    { label: "Skills", href: "/#skills" },
+    { label: "Projects", href: "/#projects" },
+    { label: "Experience", href: "/#experience" },
+    { label: "Contact", href: "/#contact" },
+    { label: "Blog", href: "/blog" },
   ];
 
   return (
@@ -57,14 +58,14 @@ export function Header() {
           <nav className="hidden md:flex items-center h-full space-x-1">
             {navItems.map((item, index) => (
               <motion.div
-                key={item.id}
+                key={item.href}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className="h-full flex items-center"
               >
                 <Link
-                  href={`/#${item.id}`}
+                  href={item.href}
                   className="inline-flex h-full items-center px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 rounded-full hover:bg-muted/50"
                 >
                   {item.label}
@@ -75,14 +76,8 @@ export function Header() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: navItems.length * 0.1 }}
-              className="flex items-center gap-2 h-full"
+              className="flex items-center h-full"
             >
-              <Link
-                href="/blog"
-                className="inline-flex h-full items-center px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200 rounded-full hover:bg-muted/50"
-              >
-                Blog
-              </Link>
               <ModeToggle />
             </motion.div>
           </nav>
@@ -117,23 +112,14 @@ export function Header() {
               <div className="px-2 pt-2 pb-6 space-y-1">
                 {navItems.map((item) => (
                   <Link
-                    key={item.id}
-                    href={`/#${item.id}`}
+                    key={item.href}
+                    href={item.href}
                     onClick={() => setIsMenuOpen(false)}
                     className="block w-full text-left px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all duration-200"
                   >
                     {item.label}
                   </Link>
                 ))}
-                <div className="pt-2 mt-2 border-t border-border/50">
-                  <Link
-                    href="/blog"
-                    className="block w-full text-left px-4 py-3 text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all duration-200"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Blog
-                  </Link>
-                </div>
               </div>
             </motion.div>
           )}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { SectionHeading } from "./ui/SectionHeading";
 
 export function About() {
   const highlights = [
@@ -12,12 +13,7 @@ export function About() {
   return (
     <section id="about" className="py-10 md:py-16 bg-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4">自己紹介</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Web技術が好きなエンジニアです。
-          </p>
-        </div>
+        <SectionHeading title="自己紹介" description="Web技術が好きなエンジニアです。" />
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>

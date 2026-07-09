@@ -4,6 +4,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { SectionHeading } from "./ui/SectionHeading";
 
 export function Projects() {
   const projects = [
@@ -92,12 +93,10 @@ export function Projects() {
   return (
     <section id="projects" className="py-10 md:py-16 bg-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4">趣味で作成したアプリ</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            趣味で作成したアプリの一部をご紹介します
-          </p>
-        </div>
+        <SectionHeading
+          title="趣味で作成したアプリ"
+          description="趣味で作成したアプリの一部をご紹介します"
+        />
 
         {/* Featured Projects */}
         <div className="mb-8">

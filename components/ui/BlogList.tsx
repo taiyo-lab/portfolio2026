@@ -19,14 +19,6 @@ interface BlogListProps {
   onPostClick: (post: BlogPost) => void;
 }
 
-// カテゴリー表示用のラベル
-const categoryLabels = {
-  tech: '技術',
-  personal: 'プライベート',
-  lifestyle: 'ライフスタイル',
-  hobby: '趣味',
-};
-
 export function BlogList({ posts, onPostClick }: BlogListProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');

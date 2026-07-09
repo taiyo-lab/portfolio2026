@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { BlogList } from "./ui/BlogList";
 import { BlogDetail } from "./ui/BlogDetail";
 import { BlogPost } from "./ui/BlogCard";
+import { SectionHeading } from "./ui/SectionHeading";
 
 export function Blog() {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
@@ -38,12 +39,10 @@ export function Blog() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {!selectedPost ? (
           <>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl mb-4">ブログ</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                技術的な知見や開発経験、学んだことを共有しています
-              </p>
-            </div>
+            <SectionHeading
+              title="ブログ"
+              description="技術的な知見や開発経験、学んだことを共有しています"
+            />
             <BlogList posts={posts} onPostClick={setSelectedPost} />
           </>
         ) : (

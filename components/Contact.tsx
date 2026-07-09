@@ -8,6 +8,7 @@ import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { Mail, Phone, Github } from "lucide-react";
 import { toast } from "sonner";
+import { SectionHeading } from "./ui/SectionHeading";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -75,14 +76,16 @@ export function Contact() {
   return (
     <section id="contact" className="py-10 md:py-16 bg-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4">お問い合わせ</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            プロジェクトのご相談やお仕事のご依頼など、
-            <br className="sm:hidden" />
-            お気軽にご連絡ください
-          </p>
-        </div>
+        <SectionHeading
+          title="お問い合わせ"
+          description={
+            <>
+              プロジェクトのご相談やお仕事のご依頼など、
+              <br className="sm:hidden" />
+              お気軽にご連絡ください
+            </>
+          }
+        />
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}

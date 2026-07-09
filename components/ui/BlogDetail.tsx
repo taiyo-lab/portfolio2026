@@ -2,15 +2,9 @@ import React from 'react';
 import { BlogPost } from './BlogCard';
 import { Button } from './button';
 import { Badge } from './badge';
-import { Calendar, Clock, User, ArrowLeft, FolderOpen, Link } from 'lucide-react';
-
-// カテゴリー表示用のラベル
-const categoryLabels = {
-  tech: '技術',
-  personal: 'プライベート',
-  lifestyle: 'ライフスタイル',
-  hobby: '趣味',
-};
+import { BlogMeta } from './BlogMeta';
+import { categoryLabels } from './blogCategory';
+import { ArrowLeft, FolderOpen, Link } from 'lucide-react';
 
 interface BlogDetailProps {
   post: BlogPost;
@@ -47,20 +41,7 @@ export function BlogDetail({ post, onBack }: BlogDetailProps) {
           
           <h1 className="text-3xl md:text-4xl">{post.title}</h1>
 
-          <div className="flex flex-wrap gap-4 text-muted-foreground">
-            <div className="flex items-center gap-1">
-              <User className="w-4 h-4" />
-              <span>{post.author}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Calendar className="w-4 h-4" />
-              <span>{post.date}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Clock className="w-4 h-4" />
-              <span>{post.readTime}</span>
-            </div>
-          </div>
+          <BlogMeta post={post} />
         </div>
 
         {/* アイキャッチ画像 */}

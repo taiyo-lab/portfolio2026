@@ -9,6 +9,7 @@ import {
   CardDescription,
 } from "./ui/card";
 import { motion } from "framer-motion";
+import { SectionHeading } from "./ui/SectionHeading";
 
 interface Skill {
   name: string;
@@ -145,10 +146,13 @@ export function SkillsPattern1() {
            transition={{ duration: 0.5 }}
            className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">スキル・技術スタック</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            実務経験に基づく技術スキルと専門領域
-          </p>
+          <SectionHeading
+            title="スキル・技術スタック"
+            description="実務経験に基づく技術スキルと専門領域"
+            className="mb-0"
+            titleClassName="text-3xl md:text-5xl font-bold mb-6 tracking-tight"
+            descriptionClassName="text-lg"
+          />
         </motion.div>
 
         <motion.div

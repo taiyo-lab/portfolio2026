@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { CalendarDays, MapPin } from "lucide-react";
+import { SectionHeading } from "./ui/SectionHeading";
 
 export function Experience() {
   const experiences = [
@@ -77,12 +78,7 @@ export function Experience() {
   return (
     <section id="experience" className="py-10 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4">経歴</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            これまでの職歴
-          </p>
-        </div>
+        <SectionHeading title="経歴" description="これまでの職歴" />
 
         {/* Work Experience */}
         <div>

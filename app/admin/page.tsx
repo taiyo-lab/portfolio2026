@@ -1,38 +1,51 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { BlogPost } from "../../components/ui/BlogCard";
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
+import { Textarea } from "../../components/ui/textarea";
+import { Label } from "../../components/ui/label";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../../components/ui/table";
 
-type Post = {
-  id: string;
+type PostFormState = {
   title: string;
   excerpt: string;
   content: string;
-  author: string;
+  category: BlogPost["category"];
   date: string;
-  readTime: string;
-  category: string;
-  tags: string[];
-  imageUrl?: string;
+  tags: string;
+};
+
+const emptyForm: PostFormState = {
+  title: "",
+  excerpt: "",
+  content: "",
+  category: "tech",
+  date: "",
+  tags: "",
 };
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(false);
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
-  const [form, setForm] = useState<any>({
-    title: "",
-    content: "",
-    category: "tech",
-    date: "",
-  });
+  const [form, setForm] = useState<PostFormState>(emptyForm);
 
   const fetchPosts = async () => {
     setLoading(true);
     try {
       const res = await fetch("/api/blog");
-      const data = await res.json();
+      const data: BlogPost[] = await res.json();
       setPosts(data);
     } finally {
       setLoading(false);
@@ -67,7 +80,9 @@ export default function AdminPage() {
     e.preventDefault();
     const payload = {
       ...form,
-      tags: form.tags ? form.tags.split(",").map((t: string) => t.trim()) : [],
+      tags: form.tags
+        ? form.tags.split(",").map((t) => t.trim())
+        : [],
     };
     const res = await fetch("/api/blog", {
       method: "POST",
@@ -76,7 +91,7 @@ export default function AdminPage() {
     });
     if (res.ok) {
       setShowCreate(false);
-      setForm({ title: "", content: "", category: "tech", date: "" });
+      setForm(emptyForm);
       fetchPosts();
     } else {
       const err = await res.json();
@@ -102,124 +117,124 @@ export default function AdminPage() {
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-2xl mb-4">管理画面</h1>
       {!authed ? (
-        <form onSubmit={login} className="space-y-2">
-          <label>
-            パスワード
-            <input
+        <form onSubmit={login} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="admin-password">パスワード</Label>
+            <Input
+              id="admin-password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="ml-2"
             />
-          </label>
-          <div>
-            <button
-              type="submit"
-              className="px-3 py-1 bg-blue-600 text-white rounded"
-            >
-              ログイン
-            </button>
           </div>
+          <Button type="submit">ログイン</Button>
         </form>
       ) : (
         <div>
           <div className="flex items-center justify-between mb-4">
-            <div>
-              <button
-                onClick={() => setShowCreate((s) => !s)}
-                className="px-3 py-1 bg-green-600 text-white rounded mr-2"
-              >
+            <div className="flex gap-2">
+              <Button onClick={() => setShowCreate((s) => !s)}>
                 New Post
-              </button>
-              <button
-                onClick={logout}
-                className="px-3 py-1 bg-gray-600 text-white rounded"
-              >
+              </Button>
+              <Button variant="secondary" onClick={logout}>
                 Logout
-              </button>
+              </Button>
             </div>
           </div>
 
           {showCreate && (
-            <form onSubmit={createPost} className="space-y-2 mb-4">
-              <input
-                placeholder="title"
-                value={form.title}
-                onChange={(e) => setForm({ ...form, title: e.target.value })}
-                className="w-full p-2 border"
-              />
-              <input
-                placeholder="excerpt"
-                value={form.excerpt || ""}
-                onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
-                className="w-full p-2 border"
-              />
-              <textarea
-                placeholder="content"
-                value={form.content || ""}
-                onChange={(e) => setForm({ ...form, content: e.target.value })}
-                className="w-full p-2 border"
-              />
-              <input
-                placeholder="category"
-                value={form.category || "tech"}
-                onChange={(e) => setForm({ ...form, category: e.target.value })}
-                className="w-full p-2 border"
-              />
-              <input
-                placeholder="date (YYYY-MM-DD)"
-                value={form.date || ""}
-                onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full p-2 border"
-              />
-              <input
-                placeholder="tags (comma separated)"
-                value={form.tags || ""}
-                onChange={(e) => setForm({ ...form, tags: e.target.value })}
-                className="w-full p-2 border"
-              />
-              <div>
-                <button
-                  type="submit"
-                  className="px-3 py-1 bg-blue-600 text-white rounded"
-                >
-                  作成
-                </button>
+            <form onSubmit={createPost} className="space-y-3 mb-6">
+              <div className="space-y-2">
+                <Label htmlFor="post-title">タイトル</Label>
+                <Input
+                  id="post-title"
+                  value={form.title}
+                  onChange={(e) => setForm({ ...form, title: e.target.value })}
+                />
               </div>
+              <div className="space-y-2">
+                <Label htmlFor="post-excerpt">抜粋</Label>
+                <Input
+                  id="post-excerpt"
+                  value={form.excerpt}
+                  onChange={(e) =>
+                    setForm({ ...form, excerpt: e.target.value })
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="post-content">本文</Label>
+                <Textarea
+                  id="post-content"
+                  value={form.content}
+                  onChange={(e) =>
+                    setForm({ ...form, content: e.target.value })
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="post-category">カテゴリー</Label>
+                <Input
+                  id="post-category"
+                  value={form.category}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      category: e.target.value as BlogPost["category"],
+                    })
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="post-date">日付 (YYYY-MM-DD)</Label>
+                <Input
+                  id="post-date"
+                  value={form.date}
+                  onChange={(e) => setForm({ ...form, date: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="post-tags">タグ (カンマ区切り)</Label>
+                <Input
+                  id="post-tags"
+                  value={form.tags}
+                  onChange={(e) => setForm({ ...form, tags: e.target.value })}
+                />
+              </div>
+              <Button type="submit">作成</Button>
             </form>
           )}
 
-          <div>
-            {loading ? (
-              <div>読み込み中...</div>
-            ) : (
-              <table className="w-full table-auto border-collapse">
-                <thead>
-                  <tr>
-                    <th className="border px-2 py-1">タイトル</th>
-                    <th className="border px-2 py-1">日付</th>
-                    <th className="border px-2 py-1">操作</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {posts.map((p) => (
-                    <tr key={p.id}>
-                      <td className="border px-2 py-1">{p.title}</td>
-                      <td className="border px-2 py-1">{p.date}</td>
-                      <td className="border px-2 py-1">
-                        <button
-                          onClick={() => deletePost(p.id)}
-                          className="px-2 py-1 bg-red-600 text-white rounded"
-                        >
-                          削除
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-          </div>
+          {loading ? (
+            <div>読み込み中...</div>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>タイトル</TableHead>
+                  <TableHead>日付</TableHead>
+                  <TableHead>操作</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {posts.map((p) => (
+                  <TableRow key={p.id}>
+                    <TableCell>{p.title}</TableCell>
+                    <TableCell>{p.date}</TableCell>
+                    <TableCell>
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => deletePost(p.id)}
+                      >
+                        削除
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </div>
       )}
     </div>

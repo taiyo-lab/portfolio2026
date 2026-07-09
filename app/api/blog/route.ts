@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/prisma";
+import { requireAdmin } from "../../../lib/adminAuth";
 
 export async function GET() {
   try {
@@ -27,11 +28,8 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  // require admin cookie
-  const cookieHeader = request.headers.get("cookie") || "";
-  if (!cookieHeader.includes("admin=1")) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
   try {
     const body = await request.json();
     const { title, content, category, date } = body;
@@ -67,10 +65,8 @@ export async function POST(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  const cookieHeader = request.headers.get("cookie") || "";
-  if (!cookieHeader.includes("admin=1")) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
   try {
     const body = await request.json();
     const { id } = body;
@@ -103,10 +99,8 @@ export async function PUT(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const cookieHeader = request.headers.get("cookie") || "";
-  if (!cookieHeader.includes("admin=1")) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  const unauthorized = requireAdmin(request);
+  if (unauthorized) return unauthorized;
   try {
     const body = await request.json();
     const { id } = body;
