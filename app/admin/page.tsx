@@ -45,8 +45,10 @@ export default function AdminPage() {
     setLoading(true);
     try {
       const res = await fetch("/api/blog");
-      const data: BlogPost[] = await res.json();
-      setPosts(data);
+      const data = await res.json();
+      setPosts(Array.isArray(data) ? data : []);
+    } catch {
+      setPosts([]);
     } finally {
       setLoading(false);
     }
