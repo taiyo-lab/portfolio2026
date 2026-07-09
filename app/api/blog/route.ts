@@ -20,6 +20,7 @@ export async function GET() {
     }));
     return NextResponse.json(mapped);
   } catch (error) {
+    console.error("GET /api/blog failed:", error);
     return NextResponse.json(
       { error: "Failed to fetch posts." },
       { status: 500 },
@@ -57,6 +58,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ ok: true, id: created.id });
   } catch (error) {
+    console.error("POST /api/blog failed:", error);
     return NextResponse.json(
       { error: "Failed to create post." },
       { status: 500 },
@@ -91,6 +93,7 @@ export async function PUT(request: Request) {
 
     return NextResponse.json({ ok: true, id: updated.id });
   } catch (error) {
+    console.error("PUT /api/blog failed:", error);
     return NextResponse.json(
       { error: "Failed to update post." },
       { status: 500 },
@@ -110,6 +113,7 @@ export async function DELETE(request: Request) {
     await prisma.post.delete({ where: { id } });
     return NextResponse.json({ ok: true });
   } catch (error) {
+    console.error("DELETE /api/blog failed:", error);
     return NextResponse.json(
       { error: "Failed to delete post." },
       { status: 500 },
