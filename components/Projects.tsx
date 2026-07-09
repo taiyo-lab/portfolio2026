@@ -19,6 +19,17 @@ export function Projects() {
       featured: true,
     },
     {
+      title: "茅ヶ崎ゴミ出しAlexaスキル",
+      description:
+        "茅ヶ崎市のゴミ出し日をAlexaで確認できる音声アプリ。今日・明日出せるゴミの種類を声で案内。",
+      image:
+        "https://images.unsplash.com/photo-1568910748155-01ca989dbdd6?w=600&h=400&fit=crop",
+      technologies: ["Node.js", "Alexa Skills Kit", "AWS Lambda"],
+      liveUrl: "#",
+      githubUrl: "https://github.com/taiyo-lab/chigasaki-gomi-skill",
+      featured: true,
+    },
+    {
       title: "タスク管理アプリ",
       description:
         "React、Node.js、PostgreSQLを使用したチーム向けタスク管理アプリ。リアルタイム更新、ドラッグ&ドロップ機能を実装。",
