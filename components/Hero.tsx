@@ -3,6 +3,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import { Github, BookOpen, Download } from "lucide-react";
+import { SaunaIkitaiIcon } from "./ui/SaunaIkitaiIcon";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { motion } from "framer-motion";
 
@@ -86,6 +87,16 @@ export function Hero() {
                 <a href="/blog">
                   <BookOpen className="w-5 h-5 mr-2" />
                   Blog
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-full">
+                <a
+                  href="https://sauna-ikitai.com/saunners/164336"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SaunaIkitaiIcon className="w-5 h-5 mr-2" />
+                  サウナイキタイ
                 </a>
               </Button>
             </div>

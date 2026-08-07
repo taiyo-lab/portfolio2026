@@ -4,16 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Separator } from "./ui/separator";
 import { Github, Heart } from "lucide-react";
-
-function SaunaIkitaiIcon({ className }: { className?: string }) {
-  return (
-    <span
-      className={`inline-flex items-center justify-center rounded-full border border-current text-[10px] font-bold ${className ?? ""}`}
-    >
-      サ
-    </span>
-  );
-}
+import { SaunaIkitaiIcon } from "./ui/SaunaIkitaiIcon";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
