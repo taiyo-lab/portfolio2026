@@ -18,15 +18,11 @@ export interface NotionSyncedPost {
   links: { label: string; url: string }[];
 }
 
-const STATUS_PROPERTY_NAMES = ["Status", "ステータス", "状態"];
 const TITLE_ALIASES = ["Title", "Name", "タイトル", "名前"];
-const EXCERPT_ALIASES = ["Excerpt", "抜粋", "概要"];
-const AUTHOR_ALIASES = ["Author", "著者"];
 const DATE_ALIASES = ["Date", "日付", "公開日"];
 const CATEGORY_ALIASES = ["Category", "カテゴリ", "カテゴリー"];
 const TAGS_ALIASES = ["Tags", "タグ"];
 const IMAGE_ALIASES = ["ImageUrl", "Image", "画像", "Cover"];
-const LINKS_ALIASES = ["Links", "参考リンク", "リンク"];
 
 const CATEGORY_MAP: Record<string, string> = {
   tech: "tech",
@@ -79,21 +75,10 @@ function extractText(
   switch (property.type) {
     case "title":
       return richTextToPlain(property.title);
-    case "rich_text":
-      return richTextToPlain(property.rich_text);
     case "select":
       return property.select?.name ?? "";
-    case "status":
-      return property.status?.name ?? "";
     case "multi_select":
       return property.multi_select.map((o) => o.name).join(", ");
-    case "url":
-      return property.url ?? "";
-    case "people":
-      return property.people
-        .map((p) => ("name" in p ? p.name ?? "" : ""))
-        .filter(Boolean)
-        .join(", ");
     default:
       return "";
   }
@@ -101,11 +86,15 @@ function extractText(
 
 function extractDate(
   property: PageObjectResponse["properties"][string] | undefined,
+  page: PageObjectResponse,
 ): Date {
   if (property?.type === "date" && property.date?.start) {
     return new Date(property.date.start);
   }
-  return new Date();
+  if (property?.type === "created_time") {
+    return new Date(property.created_time);
+  }
+  return new Date(page.created_time);
 }
 
 function extractTags(
@@ -134,21 +123,6 @@ function extractImageUrl(
   return "";
 }
 
-function extractLinks(
-  property: PageObjectResponse["properties"][string] | undefined,
-): { label: string; url: string }[] {
-  const text = extractText(property);
-  if (!text) return [];
-  return text
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const [label, url] = line.split("|").map((part) => part.trim());
-      return url ? { label, url } : { label: line, url: line };
-    });
-}
-
 async function findDataSourceId(notion: Client): Promise<string> {
   const database = await notion.databases.retrieve({
     database_id: getDatabaseId(),
@@ -161,38 +135,7 @@ async function findDataSourceId(notion: Client): Promise<string> {
   return dataSource.id;
 }
 
-async function buildStatusFilter(
-  notion: Client,
-  dataSourceId: string,
-): Promise<Record<string, unknown> | undefined> {
-  const statusPropertyName = process.env.NOTION_STATUS_PROPERTY || "Status";
-  const statusValue = process.env.NOTION_STATUS_VALUE || "Published";
-
-  const dataSource = await notion.dataSources.retrieve({
-    data_source_id: dataSourceId,
-  });
-  const propertyNames = process.env.NOTION_STATUS_PROPERTY
-    ? [statusPropertyName]
-    : STATUS_PROPERTY_NAMES;
-
-  for (const name of propertyNames) {
-    const matchKey = Object.keys(dataSource.properties).find(
-      (key) => key.toLowerCase() === name.toLowerCase(),
-    );
-    if (!matchKey) continue;
-    const property = dataSource.properties[matchKey];
-    if (property.type === "status") {
-      return { property: matchKey, status: { equals: statusValue } };
-    }
-    if (property.type === "select") {
-      return { property: matchKey, select: { equals: statusValue } };
-    }
-  }
-  return undefined;
-}
-
 async function extractPost(
-  notion: Client,
   n2m: NotionToMarkdown,
   page: PageObjectResponse,
 ): Promise<NotionSyncedPost> {
@@ -207,16 +150,16 @@ async function extractPost(
   return {
     notionId: page.id,
     title: extractText(titleProperty) || "無題",
-    excerpt: extractText(findProperty(properties, EXCERPT_ALIASES)),
+    excerpt: "",
     content: markdown.parent ?? "",
-    author: extractText(findProperty(properties, AUTHOR_ALIASES)),
-    date: extractDate(findProperty(properties, DATE_ALIASES)),
+    author: "",
+    date: extractDate(findProperty(properties, DATE_ALIASES), page),
     category: normalizeCategory(
       extractText(findProperty(properties, CATEGORY_ALIASES)),
     ),
     tags: extractTags(findProperty(properties, TAGS_ALIASES)),
     imageUrl: extractImageUrl(findProperty(properties, IMAGE_ALIASES), page),
-    links: extractLinks(findProperty(properties, LINKS_ALIASES)),
+    links: [],
   };
 }
 
@@ -224,7 +167,6 @@ export async function fetchPublishedPosts(): Promise<NotionSyncedPost[]> {
   const notion = getClient();
   const n2m = new NotionToMarkdown({ notionClient: notion });
   const dataSourceId = await findDataSourceId(notion);
-  const filter = await buildStatusFilter(notion, dataSourceId);
 
   const pages: PageObjectResponse[] = [];
   let cursor: string | undefined;
@@ -232,7 +174,6 @@ export async function fetchPublishedPosts(): Promise<NotionSyncedPost[]> {
     const response = await notion.dataSources.query({
       data_source_id: dataSourceId,
       start_cursor: cursor,
-      filter: filter as never,
     });
     for (const result of response.results) {
       if (result.object === "page" && "properties" in result) {
@@ -244,7 +185,7 @@ export async function fetchPublishedPosts(): Promise<NotionSyncedPost[]> {
 
   const posts: NotionSyncedPost[] = [];
   for (const page of pages) {
-    posts.push(await extractPost(notion, n2m, page));
+    posts.push(await extractPost(n2m, page));
   }
   return posts;
 }

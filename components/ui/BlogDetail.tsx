@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 import { BlogPost } from './BlogCard';
 import { Button } from './button';
 import { Badge } from './badge';
@@ -111,7 +112,7 @@ export function BlogDetail({ post, onBack }: BlogDetailProps) {
 
         {/* 記事本文 */}
         <div className="max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>
+          <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]} components={markdownComponents}>
             {post.content}
           </ReactMarkdown>
         </div>
