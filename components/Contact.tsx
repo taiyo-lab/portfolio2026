@@ -9,6 +9,7 @@ import { Label } from "./ui/label";
 import { Mail, Phone, Github } from "lucide-react";
 import { toast } from "sonner";
 import { SectionHeading } from "./ui/SectionHeading";
+import { SaunaIkitaiIcon } from "./ui/SaunaIkitaiIcon";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -70,6 +71,12 @@ export function Contact() {
       label: "GitHub",
       url: "https://github.com/taiyo-lab",
       color: "hover:text-gray-900",
+    },
+    {
+      icon: SaunaIkitaiIcon,
+      label: "サウナイキタイ",
+      url: "https://sauna-ikitai.com/saunners/164336",
+      color: "text-blue-500 hover:text-blue-600",
     },
   ];
 
