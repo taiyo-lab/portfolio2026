@@ -40,6 +40,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState<PostFormState>(emptyForm);
+  const [syncing, setSyncing] = useState(false);
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -101,6 +102,26 @@ export default function AdminPage() {
     }
   };
 
+  const syncFromNotion = async () => {
+    setSyncing(true);
+    try {
+      const res = await fetch("/api/notion-sync", { method: "POST" });
+      const data = await res.json();
+      if (res.ok) {
+        alert(
+          `Notion同期が完了しました (新規: ${data.created}件 / 更新: ${data.updated}件)`,
+        );
+        fetchPosts();
+      } else {
+        alert(data?.error || "Notion同期に失敗しました");
+      }
+    } catch {
+      alert("Notion同期に失敗しました");
+    } finally {
+      setSyncing(false);
+    }
+  };
+
   const deletePost = async (id: string) => {
     if (!confirm("削除してよいですか？")) return;
     const res = await fetch("/api/blog", {
@@ -137,6 +158,9 @@ export default function AdminPage() {
             <div className="flex gap-2">
               <Button onClick={() => setShowCreate((s) => !s)}>
                 New Post
+              </Button>
+              <Button variant="outline" onClick={syncFromNotion} disabled={syncing}>
+                {syncing ? "同期中..." : "Notionから同期"}
               </Button>
               <Button variant="secondary" onClick={logout}>
                 Logout
