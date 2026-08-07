@@ -94,9 +94,10 @@ export function Hero() {
                   href="https://sauna-ikitai.com/saunners/164336"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="hover:text-blue-500 transition-colors"
                 >
-                  <SaunaIkitaiIcon className="w-5 h-5 mr-2 text-blue-500" />
-                  <span className="text-blue-500">サウナイキタイ</span>
+                  <SaunaIkitaiIcon className="w-5 h-5 mr-2" />
+                  <span>サウナイキタイ</span>
                 </a>
               </Button>
             </div>
