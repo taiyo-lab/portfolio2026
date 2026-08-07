@@ -95,8 +95,8 @@ export function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <SaunaIkitaiIcon className="w-5 h-5 mr-2" />
-                  サウナイキタイ
+                  <SaunaIkitaiIcon className="w-5 h-5 mr-2 text-blue-500" />
+                  <span className="text-blue-500">サウナイキタイ</span>
                 </a>
               </Button>
             </div>
