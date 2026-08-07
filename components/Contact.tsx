@@ -76,7 +76,7 @@ export function Contact() {
       icon: SaunaIkitaiIcon,
       label: "サウナイキタイ",
       url: "https://sauna-ikitai.com/saunners/164336",
-      color: "text-blue-500 hover:text-blue-600",
+      color: "hover:text-blue-500",
     },
   ];
 

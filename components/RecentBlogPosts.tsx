@@ -43,7 +43,7 @@ export function RecentBlogPosts() {
             <BlogCard
               key={post.id}
               post={post}
-              onClick={() => router.push("/blog")}
+              onClick={() => router.push(`/blog?post=${post.id}`)}
             />
           ))}
         </div>
