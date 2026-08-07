@@ -30,20 +30,14 @@ export function Projects() {
       featured: true,
     },
     {
-      title: "タスク管理アプリ",
+      title: "Super Simple Pomodoro",
       description:
-        "React、Node.js、PostgreSQLを使用したチーム向けタスク管理アプリ。リアルタイム更新、ドラッグ&ドロップ機能を実装。",
+        "ダイヤルをタップして開始・一時停止するだけの、シンプルなポモドーロタイマー。ライト/ダークテーマに対応。",
       image:
-        "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
-      technologies: [
-        "React",
-        "Node.js",
-        "PostgreSQL",
-        "Socket.io",
-        "Material-UI",
-      ],
-      liveUrl: "#",
-      githubUrl: "#",
+        "https://images.unsplash.com/photo-1594995846645-d58328c3ffa4?w=600&h=400&fit=crop",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      liveUrl: "https://taiyo-lab.github.io/supersimplepomodoro/",
+      githubUrl: "https://github.com/taiyo-lab/supersimplepomodoro",
       featured: true,
     },
     {
