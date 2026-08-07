@@ -33,8 +33,7 @@ export function Projects() {
       title: "Super Simple Pomodoro",
       description:
         "ダイヤルをタップして開始・一時停止するだけの、シンプルなポモドーロタイマー。ライト/ダークテーマに対応。",
-      image:
-        "https://images.unsplash.com/photo-1594995846645-d58328c3ffa4?w=600&h=400&fit=crop",
+      image: "/images/supersimplepomodoro.png",
       technologies: ["HTML", "CSS", "JavaScript"],
       liveUrl: "https://taiyo-lab.github.io/supersimplepomodoro/",
       githubUrl: "https://github.com/taiyo-lab/supersimplepomodoro",
