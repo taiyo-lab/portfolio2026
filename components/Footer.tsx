@@ -13,11 +13,17 @@ export function Footer() {
   const heartBurstTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const socialLinks = [
-    { icon: Github, url: "https://github.com/taiyo-lab", label: "GitHub" },
+    {
+      icon: Github,
+      url: "https://github.com/taiyo-lab",
+      label: "GitHub",
+      hoverClass: "hover:text-foreground",
+    },
     {
       icon: SaunaIkitaiIcon,
       url: "https://sauna-ikitai.com/saunners/164336",
       label: "サウナイキタイ",
+      hoverClass: "hover:text-blue-500",
     },
   ];
 
@@ -43,14 +49,14 @@ export function Footer() {
               React、TypeScript、Node.jsを専門とするフルスタックエンジニア。
               ユーザー体験を重視したWebアプリケーション開発を行っています。
             </p>
-            <div className="flex space-x-4">
+            <div className="flex items-center space-x-4">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className={`flex items-center text-muted-foreground transition-colors ${social.hoverClass}`}
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />

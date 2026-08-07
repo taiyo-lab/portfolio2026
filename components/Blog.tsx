@@ -1,38 +1,35 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { BlogList } from "./ui/BlogList";
 import { BlogDetail } from "./ui/BlogDetail";
 import { BlogPost } from "./ui/BlogCard";
 import { SectionHeading } from "./ui/SectionHeading";
 
-export function Blog() {
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+interface BlogProps {
+  posts: BlogPost[];
+  initialPostId?: string;
+}
 
-  useEffect(() => {
-    let mounted = true;
-    fetch("/api/blog")
-      .then((res) => res.json())
-      .then((data) => {
-        if (!mounted) return;
-        const normalized = data.map((p: any) => ({
-          ...p,
-          tags:
-            typeof p.tags === "string" ? JSON.parse(p.tags) : (p.tags ?? []),
-          links:
-            typeof p.links === "string" ? JSON.parse(p.links) : (p.links ?? []),
-        }));
-        setPosts(normalized);
-      })
-      .catch(() => {})
-      .finally(() => mounted && setLoading(false));
+export function Blog({ posts, initialPostId }: BlogProps) {
+  const router = useRouter();
+  const initialPost = initialPostId
+    ? (posts.find((p) => p.id === initialPostId) ?? null)
+    : null;
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(
+    initialPost,
+  );
 
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const selectPost = (post: BlogPost) => {
+    setSelectedPost(post);
+    router.push(`/blog?post=${post.id}`, { scroll: false });
+  };
+
+  const back = () => {
+    setSelectedPost(null);
+    router.push("/blog", { scroll: false });
+  };
 
   return (
     <section id="blog" className="py-10 md:py-16">
@@ -40,18 +37,10 @@ export function Blog() {
         {!selectedPost ? (
           <>
             <SectionHeading title="Blog" />
-            <BlogList posts={posts} onPostClick={setSelectedPost} />
+            <BlogList posts={posts} onPostClick={selectPost} />
           </>
         ) : (
-          <BlogDetail
-            post={selectedPost}
-            onBack={() => setSelectedPost(null)}
-          />
-        )}
-        {loading && (
-          <div className="text-center py-8 text-muted-foreground">
-            読み込み中...
-          </div>
+          <BlogDetail post={selectedPost} onBack={back} />
         )}
       </div>
     </section>

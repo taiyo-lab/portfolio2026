@@ -1,23 +1,11 @@
 import { NextResponse } from "next/server";
 import { prisma } from "../../../lib/prisma";
 import { requireAdmin } from "../../../lib/adminAuth";
+import { getPosts } from "../../../lib/posts";
 
 export async function GET() {
   try {
-    const posts = await prisma.post.findMany({ orderBy: { date: "desc" } });
-    const mapped = posts.map((p) => ({
-      id: p.id,
-      title: p.title,
-      excerpt: p.excerpt ?? "",
-      content: p.content,
-      author: p.author ?? "",
-      date: p.date.toISOString().split("T")[0],
-      readTime: p.readTime ?? "",
-      category: p.category,
-      tags: p.tags ? JSON.parse(p.tags) : [],
-      imageUrl: p.imageUrl ?? "",
-      links: p.links ? JSON.parse(p.links) : [],
-    }));
+    const mapped = await getPosts();
     return NextResponse.json(mapped);
   } catch (error) {
     console.error("GET /api/blog failed:", error);
