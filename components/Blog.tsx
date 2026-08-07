@@ -39,10 +39,7 @@ export function Blog() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {!selectedPost ? (
           <>
-            <SectionHeading
-              title="ブログ"
-              description="技術的な知見や開発経験、学んだことを共有しています"
-            />
+            <SectionHeading title="Blog" />
             <BlogList posts={posts} onPostClick={setSelectedPost} />
           </>
         ) : (

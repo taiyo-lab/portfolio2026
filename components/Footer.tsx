@@ -3,7 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Separator } from "./ui/separator";
-import { Github, Twitter, Heart } from "lucide-react";
+import { Github, Heart } from "lucide-react";
+import { SaunaIkitaiIcon } from "./ui/SaunaIkitaiIcon";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,7 +14,11 @@ export function Footer() {
 
   const socialLinks = [
     { icon: Github, url: "https://github.com/taiyo-lab", label: "GitHub" },
-    { icon: Twitter, url: "https://twitter.com", label: "Twitter" },
+    {
+      icon: SaunaIkitaiIcon,
+      url: "https://sauna-ikitai.com/saunners/164336",
+      label: "サウナイキタイ",
+    },
   ];
 
   useEffect(() => {

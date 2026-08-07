@@ -13,7 +13,10 @@ export function About() {
   return (
     <section id="about" className="py-10 md:py-16 bg-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading title="自己紹介" description="Web技術が好きなエンジニアです。" />
+        <SectionHeading
+          title="自己紹介"
+          description="Web技術が好きなエンジニアです。"
+        />
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
@@ -48,15 +51,14 @@ export function About() {
               <h3 className="text-xl mb-4">経歴ハイライト</h3>
               <div className="space-y-4">
                 <div className="border-l-2 border-primary pl-4">
-                  <h4 className="text-lg">フロントエンドエンジニア</h4>
+                  <h4 className="text-lg">フルスタックエンジニア</h4>
                   <p className="text-muted-foreground">
                     株式会社ぐるなび（2024年〜現在）
                   </p>
                   <p className="text-sm mt-2">
                     検索機能開発。
                     <br />
-                    フロントエンドを主軸に、
-                    バックエンド・AWSまで担当領域を拡張。
+                    フロントエンド、バックエンド・AWSを担当。
                   </p>
                 </div>
                 <div className="border-l-2 border-primary pl-4">
