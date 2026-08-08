@@ -1,7 +1,6 @@
 import React from 'react';
 import { Hero } from './Hero';
 import { About } from './About';
-import { FavoriteSaunas } from './FavoriteSaunas';
 import { Skills } from './Skills';
 import { Projects } from './Projects';
 import { RecentBlogPosts } from './RecentBlogPosts';
@@ -15,7 +14,6 @@ export function Home() {
       <SideNav />
       <Hero />
       <About />
-      <FavoriteSaunas />
       <Skills />
       <Projects />
       <Experience />
