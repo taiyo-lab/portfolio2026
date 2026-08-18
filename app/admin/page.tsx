@@ -109,7 +109,7 @@ export default function AdminPage() {
       const data = await res.json();
       if (res.ok) {
         alert(
-          `Notion同期が完了しました (新規: ${data.created}件 / 更新: ${data.updated}件)`,
+          `Notion同期が完了しました (新規: ${data.created}件 / 更新: ${data.updated}件 / 削除: ${data.deleted}件)`,
         );
         fetchPosts();
       } else {
