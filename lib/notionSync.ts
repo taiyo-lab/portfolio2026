@@ -5,6 +5,7 @@ export interface SyncResult {
   total: number;
   created: number;
   updated: number;
+  deleted: number;
 }
 
 export async function syncNotionPosts(): Promise<SyncResult> {
@@ -39,5 +40,17 @@ export async function syncNotionPosts(): Promise<SyncResult> {
     else created++;
   }
 
-  return { total: posts.length, created, updated };
+  // NotionのDBを完全な正とするため、今回取得できなかった記事(Notion側で削除・
+  // 手動作成分含む)はサイト側からも削除する。ただし空データでの全削除事故を
+  // 避けるため、1件も取得できなかった場合は削除をスキップする。
+  let deleted = 0;
+  if (posts.length > 0) {
+    const notionIds = posts.map((p) => p.notionId);
+    const result = await prisma.post.deleteMany({
+      where: { OR: [{ notionId: null }, { notionId: { notIn: notionIds } }] },
+    });
+    deleted = result.count;
+  }
+
+  return { total: posts.length, created, updated, deleted };
 }
